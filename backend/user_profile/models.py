@@ -14,7 +14,7 @@ class Profile(models.Model):
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        if Currency.objects.count() > 0 and instance.default_currency is None:
+        if Currency.objects.count() > 0:
             Profile.objects.create(user=instance, default_currency = Currency.objects.first())
             return
         Profile.objects.create(user=instance)
