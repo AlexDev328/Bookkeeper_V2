@@ -1,5 +1,5 @@
 venv
-db.sqlite3
+backend/db.sqlite3
 .idea
 
 __pycache__
