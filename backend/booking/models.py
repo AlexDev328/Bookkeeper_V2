@@ -44,14 +44,13 @@ class Convertation(models.Model):
             self, force_insert=False, force_update=False, using=None, update_fields=None
     ):
         if self.source_transaction_id is None:
-            a = Transaction.objects.create(account=self.from_account, amount=self.amount_in)
-            self.source_transaction = a
+            self.source_transaction = Transaction.objects.create(account=self.from_account, amount=-self.amount_in)
 
         if self.target_transaction_id is None:
             self.target_transaction = Transaction.objects.create(account=self.to_account, amount=self.amount)
 
-
         super(Convertation, self).save(force_insert, force_update, using, update_fields)
+
 
 
 class Cost(models.Model):
