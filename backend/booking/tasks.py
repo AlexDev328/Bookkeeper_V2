@@ -7,6 +7,7 @@ from booking.models import Transaction, Cost
 
 @shared_task
 def calculate_selfcost_transaction(transaction_id: int):
+    print(f'расчитываю себестоимость транзакции №{transaction_id}')
     transaction: Transaction = Transaction.objects.get(id=transaction_id)
     print(transaction)
     # Если транзакция уже обсчитана
@@ -39,7 +40,7 @@ def calculate_selfcost_transaction(transaction_id: int):
                 transaction=transaction,
                 amount=transaction.amount,
                 source_transaction_id=sr_transaction.id,
-                amount_in_default_currency=amount_in_def_currency
+                amount_in_default_currency=-amount_in_def_currency
             )
             transaction.calculated = True
             transaction.save()

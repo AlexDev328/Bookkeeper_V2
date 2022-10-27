@@ -12,5 +12,6 @@ def process_transaction_signal(sender, instance, **kwargs):
 from django.db import transaction
 @receiver(post_save, sender=Transaction)
 def calc_transaction_signal(sender, instance,  **kwargs):
-    #calculate_selfcost_transaction.delay(instance.id)
-    transaction.on_commit(lambda: calculate_selfcost_transaction(instance.id))
+    print(f'Вызван обработчик для {str(instance)}')
+    calculate_selfcost_transaction.delay(instance.id)
+    #transaction.on_commit(lambda: calculate_selfcost_transaction(instance.id))

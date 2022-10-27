@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django.db.transaction import atomic
 from django.utils.timezone import now
 from django.contrib.auth.models import User
